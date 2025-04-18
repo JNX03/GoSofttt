@@ -11,7 +11,6 @@ export function ChatbotButton() {
   const [showPulse, setShowPulse] = useState(false)
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(false)
 
-  // Add a pulsing effect after a delay to draw attention to the chatbot
   useEffect(() => {
     const pulseTimer = setTimeout(() => {
       setShowPulse(true)
@@ -74,7 +73,6 @@ export function ChatbotButton() {
           )}
         </div>
 
-        {/* Welcome message bubble */}
         <AnimatePresence>
           {showWelcomeMessage && !isOpen && (
             <motion.div

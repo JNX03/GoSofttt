@@ -51,7 +51,6 @@ export function LoginForm() {
           description: "Redirecting to your dashboard...",
         })
 
-        // Redirect to dashboard after a short delay
         setTimeout(() => {
           router.push("/dashboard")
         }, 1000)

@@ -30,7 +30,6 @@ export function ChatbotDialog({ onClose }: ChatbotDialogProps) {
   const sendMessage = async () => {
     if (!message.trim() || isLoading) return
 
-    // Add user message to chat
     const userMessage = { role: "user" as const, content: message }
     setMessages((prev) => [...prev, userMessage])
     setMessage("")
@@ -84,7 +83,6 @@ export function ChatbotDialog({ onClose }: ChatbotDialogProps) {
     }
   }
 
-  // Auto-scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
