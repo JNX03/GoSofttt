@@ -675,3 +675,9 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
 ```
+
+
+ลิขสิทธิ์ © 2025 โดย Jnx03 (jn03official@gmail.com)
+สงวนลิขสิทธิ์ตามกฎหมายลิขสิทธิ์ไทย และระหว่างประเทศ
+เผยแพร่ภายใต้สัญญาอนุญาต GNU General Public License v3.0 ขึ้นไป
+โปรแกรมนี้มีการประทับเวลา และลายเซ็นดิจิทัลที่สามารถตรวจสอบได้
