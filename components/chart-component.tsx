@@ -74,4 +74,3 @@ export default function ChartComponent() {
 
   return <canvas ref={chartRef} height="300"></canvas>
 }
-

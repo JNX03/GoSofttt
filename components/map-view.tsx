@@ -14,4 +14,3 @@ const MapWithNoSSR = dynamic(() => import("./map-component"), {
 export function MapView() {
   return <MapWithNoSSR />
 }
-

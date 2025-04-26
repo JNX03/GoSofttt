@@ -21,7 +21,7 @@ export function ChatbotDialog({ onClose }: ChatbotDialogProps) {
     {
       role: "assistant",
       content:
-        "สวัสดี! ผมชื่อกรีน\n\nวันนี้ผมจะมาช่วยคุณจัดการขยะรวมถึงบริการทรัพยากร มีเรื่องไหนอยากให้ช่วยเหลือไหมครับ!\n\nHello! My name is Green. Today, I will help you manage your waste. Including resource services, if there is anything you want me to help with, please let me know!",
+        "สวัสดี Gosoft ! ผมชื่อกรีน\n\nวันนี้ผมจะมาช่วยคุณจัดการขยะรวมถึงบริการทรัพยากร มีเรื่องไหนอยากให้ช่วยเหลือไหมครับ!\n\nHello Gosoft! My name is Green. Today, I will help you manage your waste. Including resource services, if there is anything you want me to help with, please let me know!",
     },
   ])
   const [isLoading, setIsLoading] = useState(false)
@@ -30,6 +30,7 @@ export function ChatbotDialog({ onClose }: ChatbotDialogProps) {
   const sendMessage = async () => {
     if (!message.trim() || isLoading) return
 
+    // Add user message to chat
     const userMessage = { role: "user" as const, content: message }
     setMessages((prev) => [...prev, userMessage])
     setMessage("")
@@ -83,6 +84,7 @@ export function ChatbotDialog({ onClose }: ChatbotDialogProps) {
     }
   }
 
+  // Auto-scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
@@ -144,7 +146,7 @@ export function ChatbotDialog({ onClose }: ChatbotDialogProps) {
           <Input
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type your message..."
+            placeholder="Type here"
             className="flex-1"
             disabled={isLoading}
           />
@@ -157,4 +159,3 @@ export function ChatbotDialog({ onClose }: ChatbotDialogProps) {
     </motion.div>
   )
 }
-

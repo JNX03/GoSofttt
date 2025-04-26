@@ -50,4 +50,3 @@ export function CTASection() {
     </section>
   )
 }
-

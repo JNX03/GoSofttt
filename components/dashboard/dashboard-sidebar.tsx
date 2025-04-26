@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Logo } from "@/components/ui/logo"
-import { BarChart3, Home, Leaf, Map, Recycle, Settings, Trash2, Award } from "lucide-react"
+import { BarChart3, Home, Leaf, Map, Recycle, Settings, Trash2, Award, Sparkles, Phone } from "lucide-react"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -74,6 +74,22 @@ export function DashboardSidebar({ className }: SidebarProps) {
               </a>
             </Button>
           </Link>
+          <Link href="/dashboard/sustainability-hub" passHref legacyBehavior>
+            <Button variant="ghost" className="justify-start gap-2 font-normal" asChild>
+              <a>
+                <Leaf className="h-4 w-4" />
+                Sustainability Hub
+              </a>
+            </Button>
+          </Link>
+          <Link href="/dashboard/new-features" passHref legacyBehavior>
+            <Button variant="ghost" className="justify-start gap-2 font-normal" asChild>
+              <a>
+                <Sparkles className="h-4 w-4" />
+                New Features
+              </a>
+            </Button>
+          </Link>
           <Link href="/dashboard/settings" passHref legacyBehavior>
             <Button variant="ghost" className="justify-start gap-2 font-normal" asChild>
               <a>
@@ -82,9 +98,16 @@ export function DashboardSidebar({ className }: SidebarProps) {
               </a>
             </Button>
           </Link>
+          <Link href="/dashboard/call" passHref legacyBehavior>
+            <Button variant="ghost" className="justify-start gap-2 font-normal" asChild>
+              <a>
+                <Phone className="h-4 w-4" />
+                Voice Call
+              </a>
+            </Button>
+          </Link>
         </nav>
       </ScrollArea>
     </div>
   )
 }
-

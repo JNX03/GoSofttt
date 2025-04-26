@@ -18,4 +18,3 @@ export function MetricCard({ title, value, unit, bgColor, icon }: MetricCardProp
     </div>
   )
 }
-

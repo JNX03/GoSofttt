@@ -60,15 +60,8 @@ export function RegisterForm() {
       const result = await simulateRegister(name, email, password)
 
       if (result.success) {
-        toast({
-          title: "Registration successful",
-          description: "Redirecting to your dashboard...",
-        })
-
-        // Redirect to dashboard after a short delay
-        setTimeout(() => {
-          router.push("/dashboard")
-        }, 1000)
+        // Redirect to dashboard without showing toast
+        router.push("/dashboard")
       } else {
         toast({
           variant: "destructive",
@@ -179,4 +172,3 @@ export function RegisterForm() {
     </form>
   )
 }
-
