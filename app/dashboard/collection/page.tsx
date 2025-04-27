@@ -57,4 +57,3 @@ export default function CollectionPage() {
     </AuthCheck>
   )
 }
-

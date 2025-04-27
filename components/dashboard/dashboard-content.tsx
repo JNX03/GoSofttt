@@ -120,4 +120,3 @@ export function DashboardContent() {
 
 // Import missing components
 import { Recycle, Leaf, Award, Trash2 } from "lucide-react"
-

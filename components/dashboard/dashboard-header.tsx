@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,11 +19,38 @@ import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar"
 import { Input } from "@/components/ui/input"
 import { logout } from "@/lib/auth"
 import { useToast } from "@/components/ui/toast"
+import { useNotification } from "@/components/ui/notification-toast"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 export function DashboardHeader() {
   const router = useRouter()
   const { toast } = useToast()
+  const { addNotification } = useNotification()
   const [searchOpen, setSearchOpen] = useState(false)
+  const [unreadCount, setUnreadCount] = useState(3)
+  const [notifications, setNotifications] = useState([
+    {
+      id: "1",
+      title: "New recycling goal achieved",
+      description: "You've reached 80% of your monthly recycling target!",
+      time: "5 minutes ago",
+      read: false,
+    },
+    {
+      id: "2",
+      title: "Collection scheduled",
+      description: "Waste collection scheduled for tomorrow at 10:00 AM",
+      time: "1 hour ago",
+      read: false,
+    },
+    {
+      id: "3",
+      title: "New sustainability report",
+      description: "January 2023 sustainability report is now available",
+      time: "3 hours ago",
+      read: false,
+    },
+  ])
 
   const handleLogout = () => {
     logout()
@@ -32,6 +59,47 @@ export function DashboardHeader() {
       description: "You have been logged out of your account.",
     })
     router.push("/")
+  }
+
+  const markAllAsRead = () => {
+    setNotifications(notifications.map((n) => ({ ...n, read: true })))
+    setUnreadCount(0)
+  }
+
+  const markAsRead = (id: string) => {
+    setNotifications(notifications.map((n) => (n.id === id ? { ...n, read: true } : n)))
+    setUnreadCount((prev) => Math.max(0, prev - 1))
+  }
+
+  // Simulate fetching notifications from API
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        // In a real app, this would be an API call
+        // const response = await fetch("https://jnx03.xyz/api/notifications")
+        // const data = await response.json()
+        // setNotifications(data)
+        // setUnreadCount(data.filter(n => !n.read).length)
+      } catch (error) {
+        console.error("Error fetching notifications:", error)
+      }
+    }
+
+    fetchNotifications()
+  }, [])
+
+  // Demo function to show a notification
+  const showDemoNotification = () => {
+    addNotification({
+      title: "New recycling opportunity",
+      description: "A new recycling center has opened near your location!",
+      type: "success",
+      duration: 5000,
+      action: {
+        label: "View Details",
+        onClick: () => router.push("/dashboard/recycling-map"),
+      },
+    })
   }
 
   return (
@@ -80,11 +148,51 @@ export function DashboardHeader() {
 
       <div className="flex items-center gap-2">
         <ModeToggle />
-        <Button variant="ghost" size="icon" className="relative">
-          <Bell className="h-5 w-5" />
-          <span className="sr-only">Notifications</span>
-          <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary"></span>
-        </Button>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="ghost" size="icon" className="relative">
+              <Bell className="h-5 w-5" />
+              <span className="sr-only">Notifications</span>
+              {unreadCount > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
+                  {unreadCount}
+                </span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-80 p-0" align="end">
+            <div className="flex items-center justify-between border-b p-3">
+              <h4 className="font-medium">Notifications</h4>
+              <Button variant="ghost" size="sm" onClick={markAllAsRead}>
+                Mark all as read
+              </Button>
+            </div>
+            <div className="max-h-[300px] overflow-y-auto">
+              {notifications.length > 0 ? (
+                notifications.map((notification) => (
+                  <div
+                    key={notification.id}
+                    className={`border-b p-3 ${notification.read ? "" : "bg-muted/50"}`}
+                    onClick={() => markAsRead(notification.id)}
+                  >
+                    <div className="flex justify-between">
+                      <h5 className="font-medium">{notification.title}</h5>
+                      <span className="text-xs text-muted-foreground">{notification.time}</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground">{notification.description}</p>
+                  </div>
+                ))
+              ) : (
+                <div className="p-4 text-center text-muted-foreground">No notifications</div>
+              )}
+            </div>
+            <div className="border-t p-2">
+              <Button variant="ghost" size="sm" className="w-full" onClick={showDemoNotification}>
+                Show Demo Notification
+              </Button>
+            </div>
+          </PopoverContent>
+        </Popover>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">
@@ -116,4 +224,3 @@ export function DashboardHeader() {
     </header>
   )
 }
-

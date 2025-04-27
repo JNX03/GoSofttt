@@ -71,4 +71,3 @@ export function RecentActivity({ fullView = false }: RecentActivityProps) {
     </div>
   )
 }
-

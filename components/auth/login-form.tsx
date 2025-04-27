@@ -46,14 +46,8 @@ export function LoginForm() {
       const result = await simulateLogin(email, password)
 
       if (result.success) {
-        toast({
-          title: "Login successful",
-          description: "Redirecting to your dashboard...",
-        })
-
-        setTimeout(() => {
-          router.push("/dashboard")
-        }, 1000)
+        // Redirect to dashboard without showing toast
+        router.push("/dashboard")
       } else {
         toast({
           variant: "destructive",
@@ -138,4 +132,3 @@ export function LoginForm() {
     </form>
   )
 }
-

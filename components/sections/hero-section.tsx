@@ -20,7 +20,7 @@ export function HeroSection() {
             <div className="space-y-2">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                  Waste to ValueXGosoft - TD สั่งลุย
+                  WasteTD
                 </h1>
               </motion.div>
               <motion.div
@@ -114,4 +114,3 @@ export function HeroSection() {
     </section>
   )
 }
-

@@ -21,4 +21,3 @@ export function NotificationCard({ icon, bgColor, iconBgColor, title, subtitle }
     </div>
   )
 }
-
